@@ -11,20 +11,31 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:medicine_alert/main.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
+  testWidgets('muestra el resumen diario y permite marcar una dosis', (
+    WidgetTester tester,
+  ) async {
     await tester.pumpWidget(const MyApp());
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    expect(find.text('MedicineAlert'), findsOneWidget);
+    expect(find.text('Mi día'), findsOneWidget);
+    expect(find.text('Losartán'), findsOneWidget);
+    expect(find.text('2 pendientes'), findsOneWidget);
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
+    await tester.tap(find.byTooltip('Marcar como tomada').first);
     await tester.pump();
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    expect(find.text('1 pendientes'), findsOneWidget);
+    expect(find.byIcon(Icons.check_circle), findsOneWidget);
+  });
+
+  testWidgets('permite cambiar a la pestaña de medicamentos', (
+    WidgetTester tester,
+  ) async {
+    await tester.pumpWidget(const MyApp());
+
+    await tester.tap(find.text('Medicamentos'));
+    await tester.pump();
+
+    expect(find.text('Mis medicamentos'), findsOneWidget);
   });
 }
