@@ -14,7 +14,7 @@ class App extends StatelessWidget {
       title: 'MedicineAlert',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.light,
-      home: const LoginScreen(),
+      home: const MiPantalla(),
     );
   }
 }
