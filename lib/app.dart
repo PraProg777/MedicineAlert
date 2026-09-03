@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'screens/home_screen.dart';
 import 'theme/app_theme.dart';
 import 'screens/example_screen.dart';
+import 'screens/login_sreen.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -13,7 +14,7 @@ class App extends StatelessWidget {
       title: 'MedicineAlert',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.light,
-      home: const MiPantalla(),
+      home: const LoginScreen(),
     );
   }
 }
