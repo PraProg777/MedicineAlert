@@ -45,5 +45,28 @@ class DBProvider {
         notes TEXT
       )
       ''');
+
+    // Metodos para interactuar con la base de datos
+
+    // Obtener todas las consultas
+    Future<List<Map<String dynamic>>> obtenerConsultas() async {
+      final db = await instance.database;
+      return await db.query('consultas', orderBy: 'id DESC);
+    }
+
+    // Insertar una nueva consulta
+    Future<int> insertarConsulta(int Time, String Name, String Dosage, String Frecuency, int Period, int StartDate, int Dangerous, String Dengerous, String Note) async {
+      final db = await instance.database;
+      return await db.insert('consultas', {
+        'time': Time,
+        'name': Name,
+        'dosage': Dosage,
+        'frecuency': Frecuency,
+        'period': Period,
+        'startDate': StartDate,
+        'dangerous': Dengerous,
+        'notes': Note,
+      });
+    }
   }
 }
