@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'screens/HomeScreen.dart';
-import 'screens/MedicineScreen.dart';
-import 'screens/CalenderScreen.dart';
-import 'screens/SettingScreen.dart';
+import 'screens/home_screen.dart';
+import 'screens/medicine_screen.dart';
+import 'screens/calender_screen.dart';
+import 'screens/setting_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
