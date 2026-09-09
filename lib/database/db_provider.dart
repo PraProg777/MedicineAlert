@@ -1,36 +1,28 @@
-import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
+import 'package:sqflite/sqflite.dart';
 
 class DBProvider {
-  // Patron Singleton para mantener una sola instancia de la BD en toda la app
   static final DBProvider instance = DBProvider._init();
-  static DataBase? _database;
+  static Database? _database;
 
   DBProvider._init();
 
-  Future<DataBase> get database async {
+  Future<Database> get database async {
     if (_database != null) return _database!;
 
-    // Si no existe, inicializa la BD
-    _database = await _initDB('medicine_alert.db');
-    return _database!;
-  }
-
-  Future<DataBase> _initDB(String filePath) async {
-    // Obtiene el directorio por defecto de bases de datos del sistema
     final dbPath = await getDatabasesPath();
-    final path = join(dbPath, filePath);
+    final path = join(dbPath, 'medicine_alert.db');
 
-    // Abre o crea la BD indicando la version y la funcion onCreate
-    return await openDatabase(
+    _database = await openDatabase(
       path,
       version: 1,
       onCreate: _createDB,
     );
+
+    return _database!;
   }
 
-  // Se ejecuta solamente la primera vez que la app se inicializa en el dispositivo
-  Future _createDB(Database db, int version) async {
+  Future<void> _createDB(Database db, int version) async {
     await db.execute('''
       CREATE TABLE medicines (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -44,29 +36,37 @@ class DBProvider {
         dangerous INTEGER NOT NULL,
         notes TEXT
       )
-      ''');
+    ''');
+  }
 
-    // Metodos para interactuar con la base de datos
+  Future<List<Map<String, dynamic>>> getMedicines() async {
+    final db = await instance.database;
+    return db.query('medicines', orderBy: 'id DESC');
+  }
 
-    // Obtener todas las consultas
-    Future<List<Map<String dynamic>>> obtenerConsultas() async {
-      final db = await instance.database;
-      return await db.query('consultas', orderBy: 'id DESC);
-    }
+  Future<int> insertMedicine({
+    required int time,
+    required String name,
+    required String dosage,
+    required String frequency,
+    required int temporary,
+    required int period,
+    required int startDate,
+    required int dangerous,
+    String? notes,
+  }) async {
+    final db = await instance.database;
 
-    // Insertar una nueva consulta
-    Future<int> insertarConsulta(int Time, String Name, String Dosage, String Frecuency, int Period, int StartDate, int Dangerous, String Dengerous, String Note) async {
-      final db = await instance.database;
-      return await db.insert('consultas', {
-        'time': Time,
-        'name': Name,
-        'dosage': Dosage,
-        'frecuency': Frecuency,
-        'period': Period,
-        'startDate': StartDate,
-        'dangerous': Dengerous,
-        'notes': Note,
-      });
-    }
+    return db.insert('medicines', {
+      'time': time,
+      'name': name,
+      'dosage': dosage,
+      'frequency': frequency,
+      'temporary': temporary,
+      'period': period,
+      'startDate': startDate,
+      'dangerous': dangerous,
+      'notes': notes,
+    });
   }
 }
