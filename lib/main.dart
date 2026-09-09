@@ -7,6 +7,7 @@ typedef MyApp = App;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await DBProvider.instance.database;
+  // Se comento el comando de abajo porque se esta probando en un entorno de linux desktop
+  //await DBProvider.instance.database;
   runApp(const App());
 }
