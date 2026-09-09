@@ -5,9 +5,9 @@ import '../repositories/mock_medicine_repository.dart';
 import 'add_medicine_screen.dart';
 
 class HomeScreen extends StatelessWidget {
-  HomeScreen({super.key});
+  const HomeScreen({super.key});
 
-  final _repository = MockMedicamentosRepository();
+  static final _repository = MockMedicamentosRepository();
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class HomeScreen extends StatelessWidget {
       body: Stack(
         children: [
           FutureBuilder<List<Medicine>>(
-            future: _repository.getAllMedicines(),
+            future: HomeScreen._repository.getAllMedicines(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const Center(child: CircularProgressIndicator());
