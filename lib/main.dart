@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'app.dart';
-import 'database/db_provider.dart';
+//import 'database/db_provider.dart';
 
 typedef MyApp = App;
 
