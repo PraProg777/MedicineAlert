@@ -68,7 +68,7 @@ class MockMedicamentosRepository implements MedicineRepository {
         print(' ID:        ${m.id}');
         print(' Nombre:    ${m.name}');
         print(' Dosis:     ${m.dosage}');
-        print(' Frecuencia:${m.frecuancy}');
+        print(' Frecuencia:${m.frequency}');
         print(' Creado:    ${m.time.toIso8601String()}');
         print(' Inicio:    ${m.startDate.day}/${m.startDate.month}/${m.startDate.year}');
         print(' Temporal:  ${m.temporary ? "SÍ (Periodo: ${m.period})" : "NO"}');

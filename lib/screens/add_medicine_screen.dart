@@ -149,7 +149,7 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                     : ElevatedButton(
                         style: ElevatedButton.styleFrom(backgroundColor: Colors.blue, foregroundColor: Colors.white),
                         onPressed: _guardar,
-                        child: const Text('Guardar en BD', style: TextStyle(fontSize: 16)),
+                        child: const Text('Guardar', style: TextStyle(fontSize: 16)),
                       ),
               ),
             ],
