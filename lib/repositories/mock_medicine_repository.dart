@@ -51,4 +51,31 @@ class MockMedicamentosRepository implements MedicineRepository {
     _tablaMedicamentos.removeWhere((item) => item.id == id);
     print('MOCK LOG: Medicamento con ID $id eliminado.');
   }
+
+  // Imprime el estado actual de la "base de datos virtual" en la terminal
+  void imprimirEstadoEnTerminal() {
+    print('\n==================================================');
+    print('       ESTADO DE LA BASE DE DATOS VIRTUAL (MOCK)  ');
+    print('==================================================');
+    
+    if (_tablaMedicamentos.isEmpty) {
+      print(' [BD VACÍA] No hay registros almacenados.');
+    } else {
+      print(' Total registros: ${_tablaMedicamentos.length}\n');
+      
+      for (var m in _tablaMedicamentos) {
+        print('--------------------------------------------------');
+        print(' ID:        ${m.id}');
+        print(' Nombre:    ${m.name}');
+        print(' Dosis:     ${m.dosage}');
+        print(' Frecuencia:${m.frecuancy}');
+        print(' Creado:    ${m.time.toIso8601String()}');
+        print(' Inicio:    ${m.startDate.day}/${m.startDate.month}/${m.startDate.year}');
+        print(' Temporal:  ${m.temporary ? "SÍ (Periodo: ${m.period})" : "NO"}');
+        print(' Peligroso: ${m.dangerous ? "SÍ ⚠️" : "NO"}');
+        print(' Notas:     ${m.notes ?? "Ninguna"}');
+      }
+    }
+    print('==================================================\n');
+  }
 }
