@@ -6,7 +6,7 @@ class MedicineScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Center(
-      child: Text('Pantalla de medicamentos (en contrsuccion)')
+      child: Text('Mis medicamentos'),
     );
   }
 }
